@@ -21,7 +21,6 @@
 CSEG AT 0000H 			 ; Upon power up, the processor jumps here.
 JMP  MAIN				 ; Jump to main
 
-
 CSEG AT 000BH 			 ; Timer 0 ISR
 
 JB FLAG, INCREMENT       ; Check the FLAG
@@ -56,25 +55,13 @@ POP ACC					 ; Pop acc from the stack
 
 RETI
 
-
-
 CSEG AT 0033H			 ; Interrupt of ADC
 MOV DAC1H, ADCDATAH		 ; Move data from ADC to DAC - bits 8-11(without use bits 12-15)
 MOV DAC1L, ADCDATAL		 ; Move data from ADC to DAC - bits 0-7			 
 RETI
 
-
 CSEG AT 0100H
 MAIN:
-
-
-
-
-
-
-
-
-
 
 CLR DMA                  ; Without use of DMA
 CLR CS3					 ; Input channel 4
@@ -113,8 +100,6 @@ ORL DACCON, #01010110B
 JMP $
 	
 END
-
-
 ; conclusion:
 ;
 ; In the debugger we set in channel 4 value, and get in channel 1 duplicate value, 
@@ -129,5 +114,3 @@ END
 ; Now we set 10 KHz sine wave with the AWG without pressed INT0 and we get a sine wave with little stepps so it's convenient 
 ; to measure the width of one step - we measured and accept 3.428us so it's frequency of 291.715 kSamp/s as we expected to be close
 ; to 300KSamp/s.
-
-
